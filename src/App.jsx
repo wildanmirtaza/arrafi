@@ -1,17 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CountdownPage from "./pages/CountdownPage";
-import UndanganPages from "./pages/UndanganPages";
+import UndanganPages from "./pages/undanganPages";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Halaman Utama */}
-        <Route path="/" element={<UndanganPages />} />
+        <Route path="/" element={<div>Halaman Utama</div>} />
 
-        {/* Halaman Countdown */}
-        <Route path="/countdown" element={<CountdownPage />} />
+        {/* Halaman dengan Slug */}
+        <Route path="/:slug" element={<UndanganPages />} />
       </Routes>
     </Router>
   );
