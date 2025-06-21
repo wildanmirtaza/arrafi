@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./assets/ChatGPT Image 21 Jun 2025, 12.45.49.png";
 import backgroundpc from "./assets/Frame 21.png";
 import imgGallery1 from "./assets/imgGallery1.png";
@@ -10,14 +10,45 @@ import "./App.css"; // Tambahkan file CSS untuk mengimpor font
 function App() {
   const [isOpened, setIsOpened] = useState(false);
 
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  function calculateTimeLeft() {
+    const difference = new Date(targetDate) - new Date();
+    if (difference <= 0) return {};
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / 1000 / 60) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const timerComponents = Object.keys(timeLeft).map((interval) => {
+    if (!timeLeft[interval]) return null;
+    return (
+      <span key={interval} className="mx-1">
+        <strong>{timeLeft[interval]}</strong> {interval}
+      </span>
+    );
+  });
+
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#00409A] text-white font-sriracha">
       {/* Background image */}
-<img
-  src={backgroundpc}
-  alt="Background"
-  className="absolute inset-0 w-full h-auto object-cover opacity-75 z-10 pointer-events-none"
-/>
+      <img
+        src={backgroundpc}
+        alt="Background"
+        className="absolute inset-0 w-full h-auto object-cover opacity-75 z-10 pointer-events-none"
+      />
 
 
       {/* Halaman Pembuka */}
@@ -142,7 +173,7 @@ function App() {
             </div>
 
             <div className="relative mt-10 p-6 bg-gradient-to-l from-blue-900 to-blue-800 rounded-xl shadow-lg text-white max-w-5xl mx-auto z-20">
-              <h2 className="text-3xl font-bold text-yellow-300 mb-6 text-center">Galeri Acara</h2>
+              <h2 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Galeri Acara</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Item 1 */}
                 <div className="relative overflow-hidden rounded-lg shadow-md">
@@ -194,13 +225,13 @@ function App() {
 
 
 
-<div className="flex items-center justify-center h-full">
-  <img
-    src={logo}
-    alt="Logo"
-    className="w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[30vw] mb-10"
-  />
-</div>
+            <div className="flex items-center justify-center h-full">
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[30vw] mb-10"
+              />
+            </div>
 
 
 
