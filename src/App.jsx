@@ -10,6 +10,8 @@ import "./App.css"; // Tambahkan file CSS untuk mengimpor font
 function App() {
   const [isOpened, setIsOpened] = useState(false);
 
+  const targetDate = "2025-07-05T18:00:00"; // Hardcoded target date
+
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   function calculateTimeLeft() {
@@ -101,6 +103,15 @@ function App() {
                 <h1 className="text-3xl font-bold text-yellow-400 tracking-wider animate-fade-in">
                   Lomba Modelling & Fashion Show
                 </h1>
+              </div>
+
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-semibold text-yellow-400">Hitung Mundur</h2>
+                {timerComponents.length ? (
+                  <p className="text-xl text-gray-300">{timerComponents}</p>
+                ) : (
+                  <p className="text-xl text-gray-500 font-semibold">Acara Sudah Dimulai!</p>
+                )}
               </div>
 
               {/* Informasi Acara */}
