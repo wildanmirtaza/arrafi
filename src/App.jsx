@@ -105,15 +105,6 @@ function App() {
                 </h1>
               </div>
 
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-semibold text-yellow-400">Hitung Mundur</h2>
-                {timerComponents.length ? (
-                  <p className="text-xl text-gray-300">{timerComponents}</p>
-                ) : (
-                  <p className="text-xl text-gray-500 font-semibold">Acara Sudah Dimulai!</p>
-                )}
-              </div>
-
               {/* Informasi Acara */}
               <div className="space-y-4 mb-10 animate-slide-up">
                 <p className="text-center text-xl text-yellow-400">
@@ -123,6 +114,31 @@ function App() {
                   Pukul: <span className="text-gray-300 font-semibold">18.00 - Selesai</span>
                 </p>
               </div>
+
+
+  <h2 className="text-2xl font-bold text-yellow-300 mb-4 tracking-wide">
+    Hitung Mundur
+  </h2>
+  {timerComponents.length ? (
+    <div className="flex justify-center gap-4 text-lg">
+      {Object.entries(timeLeft).map(([key, value]) => (
+        <div
+          key={key}
+          className="flex flex-col items-center bg-white/20 rounded-lg p-4 shadow-inner"
+        >
+          <span className="text-4xl font-bold text-white">{value}</span>
+          <span className="text-sm font-medium uppercase text-gray-400 mt-2">
+            {key}
+          </span>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="text-xl text-yellow-200 font-semibold">
+      Acara Sudah Dimulai!
+    </p>
+  )}
+
 
               {/* Divider */}
               <div className="w-2/3 mx-auto border-t border-yellow-300 opacity-50 my-8"></div>
