@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../assets/1750568800919.png";
-import backgroundpc from "../assets/Frame 21.png";
-import backgroundhp from "../assets/Frame 22 (2).png";
+import logo from "../assets/logoMuria.png";
+import backgroundpc from "../assets/backgroundpc.png";
+import backgroundhp from "../assets/backgroundhp.png";
 import imgGallery1 from "../assets/imgGallery1.png";
 import imgGallery2 from "../assets/imgGallery2.png";
 import imgGallery3 from "../assets/imgGallery3.png";
@@ -19,9 +19,8 @@ function App() {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        // Tentukan ukuran layar saat ini
         const checkScreenSize = () => {
-            setIsMobile(window.innerWidth <= 768); // Misal, layar <= 768px dianggap HP
+            setIsMobile(window.innerWidth <= 768);
         };
 
         checkScreenSize();
@@ -83,9 +82,9 @@ function App() {
     };
 
     const pageTransition = {
-        hidden: { opacity: 0, y: -200 }, // Posisi awal (saat elemen disembunyikan)
-        visible: { opacity: 1, x: 0, transition: { duration: 0.8 } }, // Posisi akhir (saat elemen terlihat)
-        exit: { opacity: 0, x: 200, transition: { duration: 0.8 } }, // Transisi keluar
+        hidden: { opacity: 0, y: -200 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
+        exit: { opacity: 0, x: 200, transition: { duration: 0.8 } },
     };
 
 
@@ -101,14 +100,14 @@ function App() {
 
     return (
         <div className="relative h-screen w-screen overflow-hidden bg-[#003F99] text-white font-sriracha">
-        <motion.img
-            src={isMobile ? backgroundhp : backgroundpc} // Gunakan gambar sesuai perangkat
-            alt="Background"
-            className="absolute inset-0 w-full h-auto object-cover opacity-75 pointer-events-none"
-            initial={{ scale: 1.2 }}
-            animate={isOpened ? { scale: 1.15 } : { scale: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-        />
+            <motion.img
+                src={isMobile ? backgroundhp : backgroundpc}
+                alt="Background"
+                className="absolute inset-0 w-full h-auto object-cover opacity-75 pointer-events-none"
+                initial={{ scale: 1.2 }}
+                animate={isOpened ? { scale: 1.15 } : { scale: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            />
 
 
             <AnimatePresence>
@@ -135,14 +134,14 @@ function App() {
                             animate="visible"
                         >
                             <p>Special Invite To:</p>
-<p
-    className="text-2xl font-bold text-yellow-400 relative"
-    style={{
-        WebkitTextStroke: "0.25px #d8c600", // Stroke warna hitam
-    }}
->
-    {decodedString}
-</p>
+                            <p
+                                className="text-2xl font-bold text-yellow-400 relative"
+                                style={{
+                                    WebkitTextStroke: "0.25px #d8c600",
+                                }}
+                            >
+                                {decodedString}
+                            </p>
                         </motion.div>
                         <motion.button
                             onClick={() => setIsOpened(true)}
@@ -325,7 +324,6 @@ function App() {
                             <div className="relative mt-10 p-6 bg-gradient-to-l from-blue-900 to-blue-800 rounded-xl shadow-lg text-white max-w-5xl mx-auto z-20 border-1 border-yellow-500">
                                 <h2 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Galeri Acara</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    {/* Item 1 */}
                                     <div className="relative overflow-hidden rounded-lg shadow-md group">
                                         <img
                                             src={imgGallery1}
@@ -336,7 +334,6 @@ function App() {
                                             <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Sungai Rahtawu</p>
                                         </div>
                                     </div>
-                                    {/* Item 2 */}
                                     <div className="relative overflow-hidden rounded-lg shadow-md group">
                                         <img
                                             src={imgGallery2}
@@ -347,7 +344,6 @@ function App() {
                                             <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Sungai Rahtawu</p>
                                         </div>
                                     </div>
-                                    {/* Item 3 */}
                                     <div className="relative overflow-hidden rounded-lg shadow-md group">
                                         <img
                                             src={imgGallery3}
@@ -358,7 +354,6 @@ function App() {
                                             <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Bukit Puteran</p>
                                         </div>
                                     </div>
-                                    {/* Item 4 */}
                                     <div className="relative overflow-hidden rounded-lg shadow-md group">
                                         <img
                                             src={imgGallery4}
@@ -372,114 +367,110 @@ function App() {
                                 </div>
                             </div>
 
-<div className="mt-10 bg-gradient-to-r from-blue-800 to-blue-900 p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-500">
-    <h1 className="text-3xl font-extrabold text-yellow-400 text-center mb-8 tracking-wide">
-        Reservasi Kehadiran
-    </h1>
-<form className="space-y-8">
-    {/* Nama Anda */}
-    <div>
-        <label className="block text-lg font-semibold text-gray-200 mb-2">
-            Nama Anda
-        </label>
-        <div className="relative">
-            <input
-                type="text"
-                placeholder="Masukkan Nama Anda"
-                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-blue-900 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
-                value={decodedString}
-                disabled
-            />
-            <span className="absolute right-3 top-3.5 text-gray-400">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 14v7m-4-4h8"
-                    />
-                </svg>
-            </span>
-        </div>
-    </div>
+                            <div className="mt-10 bg-gradient-to-r from-blue-800 to-blue-900 p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-500">
+                                <h1 className="text-3xl font-extrabold text-yellow-400 text-center mb-8 tracking-wide">
+                                    Reservasi Kehadiran
+                                </h1>
+                                <form className="space-y-8">
+                                    <div>
+                                        <label className="block text-lg font-semibold text-gray-200 mb-2">
+                                            Nama Anda
+                                        </label>
+                                        <div className="relative">
+                                            <input
+                                                type="text"
+                                                placeholder="Masukkan Nama Anda"
+                                                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-blue-900 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+                                                value={decodedString}
+                                                disabled
+                                            />
+                                            <span className="absolute right-3 top-3.5 text-gray-400">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className="h-5 w-5"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                    strokeWidth={2}
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                                                    />
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M12 14v7m-4-4h8"
+                                                    />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
 
-    {/* Jumlah Tamu */}
-    <div>
-        <label className="block text-lg font-semibold text-gray-200 mb-2">
-            Jumlah Tamu
-        </label>
-        <div className="relative">
-            <input
-                type="number"
-                min="1"
-                placeholder="Masukkan jumlah tamu"
-                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-blue-900 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
-            />
-            <span className="absolute right-3 top-3.5 text-gray-400">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                    />
-                </svg>
-            </span>
-        </div>
-    </div>
+                                    <div>
+                                        <label className="block text-lg font-semibold text-gray-200 mb-2">
+                                            Jumlah Tamu
+                                        </label>
+                                        <div className="relative">
+                                            <input
+                                                type="number"
+                                                min="1"
+                                                placeholder="Masukkan jumlah tamu"
+                                                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-blue-900 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+                                            />
+                                            <span className="absolute right-3 top-3.5 text-gray-400">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className="h-5 w-5"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                    strokeWidth={2}
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                                                    />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
 
-    {/* Konfirmasi Kehadiran */}
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-blue-900 hover:bg-blue-800 transition cursor-pointer shadow-md">
-        <input
-            type="radio"
-            name="kehadiran"
-            value="Hadir"
-            className="w-5 h-5 focus:ring-2 focus:ring-yellow-300"
-        />
-        <span className="text-sm font-medium text-gray-300">Hadir</span>
-    </label>
-    <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-blue-900 hover:bg-blue-800 transition cursor-pointer shadow-md">
-        <input
-            type="radio"
-            name="kehadiran"
-            value="Tidak Hadir"
-            className="w-5 h-5 focus:ring-2 focus:ring-yellow-300"
-        />
-        <span className="text-sm font-medium text-gray-300">Tidak Hadir</span>
-    </label>
-</div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-blue-900 hover:bg-blue-800 transition cursor-pointer shadow-md">
+                                            <input
+                                                type="radio"
+                                                name="kehadiran"
+                                                value="Hadir"
+                                                className="w-5 h-5 focus:ring-2 focus:ring-yellow-300"
+                                            />
+                                            <span className="text-sm font-medium text-gray-300">Hadir</span>
+                                        </label>
+                                        <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-blue-900 hover:bg-blue-800 transition cursor-pointer shadow-md">
+                                            <input
+                                                type="radio"
+                                                name="kehadiran"
+                                                value="Tidak Hadir"
+                                                className="w-5 h-5 focus:ring-2 focus:ring-yellow-300"
+                                            />
+                                            <span className="text-sm font-medium text-gray-300">Tidak Hadir</span>
+                                        </label>
+                                    </div>
 
 
-    {/* Tombol Kirim */}
-    <div className="text-center">
-        <button
-            type="submit"
-            className="bg-yellow-600 hover:bg-yellow-700 text-gray-300 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
-        >
-            Kirim Reservasi
-        </button>
-    </div>
-</form>
+                                    <div className="text-center">
+                                        <button
+                                            type="submit"
+                                            className="bg-yellow-600 hover:bg-yellow-700 text-gray-300 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
+                                        >
+                                            Kirim Reservasi
+                                        </button>
+                                    </div>
+                                </form>
 
-</div>
+                            </div>
 
 
 
@@ -495,12 +486,12 @@ function App() {
                                     <div className="relative group bg-gradient-to-r from-yellow-400 to-yellow-600 p-1 rounded-2xl shadow-lg">
                                         <div className="bg-white p-2 rounded-xl transition-transform duration-300 group-hover:scale-105">
                                             <QRCode
-                                                value={slug} // Data unik untuk QR Code
+                                                value={slug}
                                                 renderAs="canvas"
-                                                size={isMobile ? 240 : 300} // Ukuran QR Code
-                                                level="H" // Tingkat koreksi error
-                                                fgColor="#000000" // Warna QR Code
-                                                bgColor="#FFFFFF" // Warna latar belakang QR Code
+                                                size={isMobile ? 240 : 300}
+                                                level="H"
+                                                fgColor="#000000"
+                                                bgColor="#FFFFFF"
                                                 icon={logoEnter}
                                                 iconSize={75}
                                             />
