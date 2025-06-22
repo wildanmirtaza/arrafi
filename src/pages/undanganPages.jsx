@@ -122,7 +122,7 @@ function App() {
         }
 
         try {
-            const response = await fetch('http://103.84.206.38:3000/reservasi', {
+            const response = await fetch('https://rakevserver.space/reservasi', {
                 method: 'POST', // Tetap menggunakan POST untuk mendukung create dan update
                 headers: {
                     'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ function App() {
 
     const fetchReservasi = async () => {
         try {
-            const response = await fetch('http://103.84.206.38:3000/reservasi', {
+            const response = await fetch('https://rakevserver.space/reservasi', {
                 method: 'GET',
             });
 
@@ -172,7 +172,7 @@ function App() {
     const fetchGuest = async () => {
 
         try {
-            const response = await fetch('http://103.84.206.38:3000/tamu', {
+            const response = await fetch('https://rakevserver.space/tamu', {
                 method: 'GET',
             });
 

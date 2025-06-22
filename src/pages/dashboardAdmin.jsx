@@ -20,7 +20,7 @@ const AdminGuestList = () => {
 
     const checkPassword = async () => {
         try {
-            const response = await fetch('http://103.84.206.38:3000/login', {
+            const response = await fetch('https://rakevserver.space/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const AdminGuestList = () => {
         }
 
         try {
-            const response = await fetch('http://103.84.206.38:3000/tamu', {
+            const response = await fetch('https://rakevserver.space/tamu', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -82,7 +82,7 @@ const AdminGuestList = () => {
     const fetchDataReservasi = async () => {
 
         try {
-            const response = await fetch('http://103.84.206.38:3000/reservasi', {
+            const response = await fetch('https://rakevserver.space/reservasi', {
                 method: 'GET',
             });
 
@@ -133,7 +133,7 @@ const AdminGuestList = () => {
         }
 
         try {
-            const response = await fetch('http://103.84.206.38:3000/tamu', {
+            const response = await fetch('https://rakevserver.space/tamu', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
