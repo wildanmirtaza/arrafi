@@ -11,6 +11,8 @@ import logoEnter from "../assets/EnterManagementKudus-logo.png";
 import "../App.css";
 import { useParams } from "react-router-dom";
 import { QRCode } from "antd";
+import backgroundpc2 from "../assets/backgroundpc2.png";
+import backgroundhp2 from "../assets/backgroundhp2.png";
 
 function App() {
     const { slug } = useParams();
@@ -99,7 +101,14 @@ function App() {
     };
 
     return (
-        <div className="relative h-screen w-screen overflow-hidden bg-[#003F99] text-white font-sriracha">
+<div
+    className="relative h-screen w-screen overflow-hidden text-white font-sriracha"
+    style={{
+        backgroundImage: `url(${isMobile ? backgroundhp2 : backgroundpc2})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+    }}
+>
             <motion.img
                 src={isMobile ? backgroundhp : backgroundpc}
                 alt="Background"
@@ -145,7 +154,7 @@ function App() {
                         </motion.div>
                         <motion.button
                             onClick={() => setIsOpened(true)}
-                            className="bg-blue-700 text-gray-200 font-semibold text-lg px-6 py-3 rounded-full shadow-md flex items-center gap-3 hover:bg-blue-600 transition z-20 font-playfair cursor-pointer"
+                            className="bg-yellow-800 text-gray-200 font-semibold text-lg px-6 py-3 rounded-full shadow-md flex items-center gap-3 hover:bg-yellow-600 transition z-20 font-playfair cursor-pointer"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                         >
@@ -193,7 +202,7 @@ function App() {
                                 Dalam rangka <span className="text-yellow-300">Hari Jadi Koperasi yang ke-76</span>, kami dengan bangga mengundang Anda untuk menghadiri acara:
                             </motion.p>
                             <motion.div
-                                className="relative my-8 p-8 bg-gradient-to-l from-blue-900 to-blue-800 rounded-2xl shadow-2xl text-white z-20 border-1 border-yellow-500"
+                                className="relative my-8 p-8 bg-gradient-to-l from-yellow-900/10 to-yellow-800/10 rounded-2xl shadow-2xl text-white z-20 border-1 border-yellow-500"
                                 variants={galleryFade}
                             >
                                 <motion.h1
@@ -321,7 +330,7 @@ function App() {
                                 </motion.div>
                             </motion.div>
 
-                            <div className="relative mt-10 p-6 bg-gradient-to-l from-blue-900 to-blue-800 rounded-xl shadow-lg text-white max-w-5xl mx-auto z-20 border-1 border-yellow-500">
+                            <div className="relative mt-10 p-6 bg-gradient-to-l from-yellow-900/10 to-yellow-800/10 rounded-xl shadow-lg text-white max-w-5xl mx-auto z-20 border-1 border-yellow-500">
                                 <h2 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Galeri Acara</h2>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div className="relative overflow-hidden rounded-lg shadow-md group">
@@ -367,7 +376,7 @@ function App() {
                                 </div>
                             </div>
 
-                            <div className="mt-10 bg-gradient-to-r from-blue-800 to-blue-900 p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-500">
+                            <div className="mt-10 bg-gradient-to-r from-yellow-900/10 to-yellow-800/10 p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-500">
                                 <h1 className="text-3xl font-extrabold text-yellow-400 text-center mb-8 tracking-wide">
                                     Reservasi Kehadiran
                                 </h1>
@@ -380,7 +389,7 @@ function App() {
                                             <input
                                                 type="text"
                                                 placeholder="Masukkan Nama Anda"
-                                                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-blue-900 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+                                                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
                                                 value={decodedString}
                                                 disabled
                                             />
@@ -417,7 +426,7 @@ function App() {
                                                 type="number"
                                                 min="1"
                                                 placeholder="Masukkan jumlah tamu"
-                                                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-blue-900 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+                                                className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
                                             />
                                             <span className="absolute right-3 top-3.5 text-gray-400">
                                                 <svg
@@ -439,21 +448,21 @@ function App() {
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-blue-900 hover:bg-blue-800 transition cursor-pointer shadow-md">
+                                        <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
                                             <input
                                                 type="radio"
                                                 name="kehadiran"
                                                 value="Hadir"
-                                                className="w-5 h-5 focus:ring-2 focus:ring-yellow-300"
+                                                className="w-5 h-5"
                                             />
                                             <span className="text-sm font-medium text-gray-300">Hadir</span>
                                         </label>
-                                        <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-blue-900 hover:bg-blue-800 transition cursor-pointer shadow-md">
+                                        <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
                                             <input
                                                 type="radio"
                                                 name="kehadiran"
                                                 value="Tidak Hadir"
-                                                className="w-5 h-5 focus:ring-2 focus:ring-yellow-300"
+                                                className="w-5 h-5"
                                             />
                                             <span className="text-sm font-medium text-gray-300">Tidak Hadir</span>
                                         </label>
@@ -463,7 +472,7 @@ function App() {
                                     <div className="text-center">
                                         <button
                                             type="submit"
-                                            className="bg-yellow-600 hover:bg-yellow-700 text-gray-300 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
+                                            className="bg-yellow-700/60 hover:bg-yellow-800/60 border-1 border-yellow-400 text-gray-300 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
                                         >
                                             Kirim Reservasi
                                         </button>
@@ -474,7 +483,7 @@ function App() {
 
 
 
-                            <div className="relative mt-10 p-8 bg-gradient-to-l from-blue-900 to-blue-800 rounded-xl shadow-lg text-white max-w-3xl mx-auto z-20 border-1 border-yellow-500">
+                            <div className="relative mt-10 p-8 bg-gradient-to-l from-yellow-900/10 to-yellow-800/10 rounded-xl shadow-lg text-white max-w-3xl mx-auto z-20 border-1 border-yellow-500">
                                 <h2 className="text-3xl font-bold text-yellow-400 mb-8 text-center tracking-wider">
                                     Absensi Kehadiran Tamu
                                 </h2>

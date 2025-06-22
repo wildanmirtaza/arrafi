@@ -18,7 +18,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(0, 43, 93); /* Warna biru tua */
+  background-color: rgba(212, 134, 38, 0.538); /* Warna biru tua */
   border-radius: 4px; /* Membuat sudut melengkung */
   border: 1px solid transparent; /* Memberi jarak kecil dengan track */
 }
