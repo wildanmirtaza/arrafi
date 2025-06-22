@@ -497,7 +497,7 @@ function App() {
                                             <QRCode
                                                 value={slug} // Data unik untuk QR Code
                                                 renderAs="canvas"
-                                                size={300} // Ukuran QR Code
+                                                size={isMobile ? 240 : 300} // Ukuran QR Code
                                                 level="H" // Tingkat koreksi error
                                                 fgColor="#000000" // Warna QR Code
                                                 bgColor="#FFFFFF" // Warna latar belakang QR Code
