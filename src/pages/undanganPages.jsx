@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../assets/logoMuria.png";
+import logo from "../assets/hero-app.png";
 import backgroundpc from "../assets/backgroundpc.png";
-import backgroundhp from "../assets/backgroundhp.png";
+import backgroundhp from "../assets/backgroundhp4.png";
 import imgGallery1 from "../assets/imgGallery1.png";
 import imgGallery2 from "../assets/imgGallery2.png";
 import imgGallery3 from "../assets/imgGallery3.png";
@@ -12,7 +12,7 @@ import "../App.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { QRCode, message } from "antd";
 import backgroundpc2 from "../assets/backgroundpc2.png";
-import backgroundhp2 from "../assets/backgroundhp2.png";
+import backgroundhp2 from "../assets/bg-app-hp.gif";
 
 function App() {
     const navigate = useNavigate();
@@ -77,7 +77,7 @@ function App() {
     };
 
     const fadeIn = {
-        hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, transition: { duration: 1 } },
     };
 
@@ -102,6 +102,31 @@ function App() {
         hidden: { opacity: 0, y: 10 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
     };
+
+
+  const galleryItemAnimation = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: (i) => ({
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, delay: i * 0.5 },
+    }),
+  };
+
+    const staggerContainer = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+    const scaleUp = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 1, ease: "easeOut" } },
+  };
 
     const [guestCount, setGuestCount] = useState('');
     const [attendance, setAttendance] = useState('');
@@ -210,7 +235,8 @@ function App() {
                 className="relative h-screen w-screen overflow-hidden text-white font-sriracha"
                 style={{
                     backgroundImage: `url(${isMobile ? backgroundhp2 : backgroundpc2})`,
-                    backgroundSize: 'cover',
+                    // backgroundSize: 'cover',
+                    backgroundSize: '150%',
                     backgroundPosition: 'center',
                 }}
             >
@@ -242,7 +268,7 @@ function App() {
                                 animate="visible"
                             />
                             <motion.div
-                                className="mb-8 text-lg space-y-1 font-playfair"
+                                className="mb-8 text-lg space-y-1 font-poppins"
                                 variants={fadeIn}
                                 initial="hidden"
                                 animate="visible"
@@ -259,7 +285,7 @@ function App() {
                             </motion.div>
                             <motion.button
                                 onClick={() => setIsOpened(true)}
-                                className="bg-yellow-800 text-gray-200 font-semibold text-lg px-6 py-3 rounded-full shadow-md flex items-center gap-3 hover:bg-yellow-600 transition z-20 font-playfair cursor-pointer"
+                                className="bg-yellow-800 text-gray-200 font-semibold text-lg px-6 py-3 rounded-full shadow-md flex items-center gap-3 hover:bg-yellow-600 transition z-20 font-poppins cursor-pointer"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                             >
@@ -286,7 +312,7 @@ function App() {
                 <AnimatePresence>
                     {isOpened && (
                         <motion.div
-                            className="absolute left-0 right-0 -bottom-50 p-6 overflow-y-auto font-playfair"
+                            className="absolute left-0 right-0 -bottom-50 p-6 overflow-y-auto font-poppins"
                             style={{ top: 200 }}
                             variants={pageTransition}
                             initial="hidden"
@@ -307,7 +333,7 @@ function App() {
                                     Dalam rangka <span className="text-yellow-300">Hari Jadi Koperasi yang ke-76</span>, kami dengan bangga mengundang Anda untuk menghadiri acara:
                                 </motion.p>
                                 <motion.div
-                                    className="relative my-8 p-8 bg-gradient-to-l from-yellow-900/10 to-yellow-800/10 rounded-2xl shadow-2xl text-white z-20 border-1 border-yellow-500"
+                                    className="relative my-8 p-8 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-2xl shadow-2xl text-white z-20 border-1 border-yellow-500"
                                     variants={galleryFade}
                                 >
                                     <motion.h1
@@ -392,11 +418,19 @@ function App() {
 
                                     <motion.div
                                         className="space-y-6"
-                                        variants={fadeIn}
+                                        variants={{
+                                            hidden: { opacity: 0, y: 20 },
+                                            visible: {
+                                                opacity: 1,
+                                                y: 0,
+                                                transition: { duration: 0.5, delay: 0.2 }
+                                            },
+                                        }}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.2 }}
                                     >
-                                        <h2 className="text-3xl font-semibold text-yellow-400 text-center mb-4">
-                                            Kategori
-                                        </h2>
+                                        <h2 className="text-3xl font-semibold text-yellow-400 text-center mb-4">Kategori</h2>
                                         <ul className="list-disc list-inside text-lg space-y-3 max-w-xl mx-auto text-gray-200">
                                             <li>Prestasi</li>
                                             <li>Motivasi</li>
@@ -409,16 +443,33 @@ function App() {
 
                                     <motion.div
                                         className="w-2/3 mx-auto border-t border-yellow-300 opacity-50 my-8"
-                                        variants={fadeIn}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.2 }}
+                                        variants={{
+                                            hidden: { opacity: 0 },
+                                            visible: {
+                                                opacity: 1,
+                                                transition: { duration: 0.5, delay: 0.2 }
+                                            },
+                                        }}
                                     ></motion.div>
 
                                     <motion.div
                                         className="text-center"
-                                        variants={fadeIn}
+                                        variants={{
+                                            hidden: { opacity: 0, y: 20 },
+                                            visible: {
+                                                opacity: 1,
+                                                y: 0,
+                                                transition: { duration: 0.5, delay: 0.2 }
+                                            },
+                                        }}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.2 }}
                                     >
-                                        <h2 className="text-3xl font-semibold text-yellow-400 mb-4">
-                                            Lokasi Acara
-                                        </h2>
+                                        <h2 className="text-3xl font-semibold text-yellow-400 mb-4">Lokasi Acara</h2>
                                         <div className="animate-zoom-in">
                                             <iframe
                                                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3955.0784547356473!2d110.8417464421937!3d-6.807802809170903!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7123c740504c15%3A0x5c953c221017d9c6!2sMarker%20Location!5e0!3m2!1sen!2sid!4v1627990606581!5m2!1sen!2sid"
@@ -430,170 +481,226 @@ function App() {
                                                 title="Google Maps Location"
                                             ></iframe>
                                         </div>
-
                                         <p className="text-gray-300 font-semibold mt-3">Alun-Alun Simpang 7 Kudus</p>
                                     </motion.div>
+
+
                                 </motion.div>
 
-                                <div className="relative mt-10 p-6 bg-gradient-to-l from-yellow-900/10 to-yellow-800/10 rounded-xl shadow-lg text-white max-w-5xl mx-auto z-20 border-1 border-yellow-500">
-                                    <h2 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Galeri Acara</h2>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                        <div className="relative overflow-hidden rounded-lg shadow-md group">
-                                            <img
-                                                src={imgGallery1}
-                                                alt="Galeri 1"
-                                                className="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Sungai Rahtawu</p>
-                                            </div>
-                                        </div>
-                                        <div className="relative overflow-hidden rounded-lg shadow-md group">
-                                            <img
-                                                src={imgGallery2}
-                                                alt="Galeri 2"
-                                                className="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Sungai Rahtawu</p>
-                                            </div>
-                                        </div>
-                                        <div className="relative overflow-hidden rounded-lg shadow-md group">
-                                            <img
-                                                src={imgGallery3}
-                                                alt="Galeri 3"
-                                                className="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Bukit Puteran</p>
-                                            </div>
-                                        </div>
-                                        <div className="relative overflow-hidden rounded-lg shadow-md group">
-                                            <img
-                                                src={imgGallery4}
-                                                alt="Galeri 4"
-                                                className="w-full h-56 object-cover transform transition-transform duration-500 group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Bukit Puteran</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <motion.div
+      className="relative mt-10 p-6 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-xl shadow-lg text-white max-w-5xl mx-auto z-20 border-1 border-yellow-500"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <motion.h2
+        className="text-3xl font-bold text-yellow-400 mb-6 text-center"
+        variants={fadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        Galeri Acara
+      </motion.h2>
 
-                                <div className="mt-10 bg-gradient-to-r from-yellow-900/10 to-yellow-800/10 p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-500">
-                                    <h1 className="text-3xl font-extrabold text-yellow-400 text-center mb-8 tracking-wide">
-                                        Reservasi Kehadiran
-                                    </h1>
-                                    <div className="space-y-8">
-                                        <div>
-                                            <label className="block text-lg font-semibold text-gray-200 mb-2">Nama Anda</label>
-                                            <div className="relative">
-                                                <input
-                                                    type="text"
-                                                    placeholder="Masukkan Nama Anda"
-                                                    className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
-                                                    value={decodedString}
-                                                    disabled
-                                                />
-                                            </div>
-                                        </div>
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {[imgGallery1, imgGallery2, imgGallery3, imgGallery4].map((img, index) => (
+          <motion.div
+            key={index}
+            className="relative overflow-hidden rounded-lg shadow-md group"
+            custom={index} // Untuk mengatur delay berdasarkan index
+            variants={galleryItemAnimation}
+          >
+            <img
+              src={img}
+              alt={`Galeri ${index + 1}`}
+              className="w-full h-56 object-cover border-1 border-yellow-400 transform transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                {["Sungai Rahtawu", "Sungai Rahtawu", "Bukit Puteran", "Bukit Puteran"][index]}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </motion.div>
 
-                                        <div>
-                                            <label className="block text-lg font-semibold text-gray-200 mb-2">Jumlah Tamu</label>
-                                            <div className="relative">
-                                                <input
-                                                    type="number"
-                                                    min="1"
-                                                    placeholder="Masukkan jumlah tamu"
-                                                    className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
-                                                    value={guestCount} // Terkontrol oleh state
-                                                    onChange={(e) => setGuestCount(e.target.value)} // Update state saat input berubah
-                                                />
-                                            </div>
-                                        </div>
+<motion.div
+      className="mt-10 bg-gradient-to-r from-[#fdfd9615] to-[#fdfd9615] p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-500"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <motion.h1
+        className="text-3xl font-extrabold text-yellow-400 text-center mb-8 tracking-wide"
+        variants={fadeIn}
+      >
+        Reservasi Kehadiran
+      </motion.h1>
 
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
-                                                <input
-                                                    type="radio"
-                                                    name="kehadiran"
-                                                    value="Hadir"
-                                                    className="w-5 h-5"
-                                                    checked={attendance === 'Hadir'} // Terkontrol oleh state
-                                                    onChange={() => setAttendance('Hadir')} // Update state saat radio berubah
-                                                />
-                                                <span className="text-sm font-medium text-gray-300">Hadir</span>
-                                            </label>
-                                            <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
-                                                <input
-                                                    type="radio"
-                                                    name="kehadiran"
-                                                    value="Tidak Hadir"
-                                                    className="w-5 h-5"
-                                                    checked={attendance === 'Tidak Hadir'} // Terkontrol oleh state
-                                                    onChange={() => setAttendance('Tidak Hadir')} // Update state saat radio berubah
-                                                />
-                                                <span className="text-sm font-medium text-gray-300">Tidak Hadir</span>
-                                            </label>
-                                        </div>
+      <motion.div
+        className="space-y-8"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {/* Nama Anda */}
+        <motion.div variants={fadeIn}>
+          <label className="block text-lg font-semibold text-gray-200 mb-2">
+            Nama Anda
+          </label>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Masukkan Nama Anda"
+              className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+              value={decodedString}
+              disabled
+            />
+          </div>
+        </motion.div>
+
+        {/* Jumlah Tamu */}
+        <motion.div variants={fadeIn}>
+          <label className="block text-lg font-semibold text-gray-200 mb-2">
+            Jumlah Tamu
+          </label>
+          <div className="relative">
+            <input
+              type="number"
+              min="1"
+              placeholder="Masukkan jumlah tamu"
+              className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+              value={guestCount}
+              onChange={(e) => setGuestCount(e.target.value)}
+            />
+          </div>
+        </motion.div>
+
+        {/* Kehadiran */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          variants={fadeIn}
+        >
+          <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
+            <input
+              type="radio"
+              name="kehadiran"
+              value="Hadir"
+              className="w-5 h-5"
+              checked={attendance === "Hadir"}
+              onChange={() => setAttendance("Hadir")}
+            />
+            <span className="text-sm font-medium text-gray-300">Hadir</span>
+          </label>
+          <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
+            <input
+              type="radio"
+              name="kehadiran"
+              value="Tidak Hadir"
+              className="w-5 h-5"
+              checked={attendance === "Tidak Hadir"}
+              onChange={() => setAttendance("Tidak Hadir")}
+            />
+            <span className="text-sm font-medium text-gray-300">
+              Tidak Hadir
+            </span>
+          </label>
+        </motion.div>
+
+        {/* Kirim Reservasi */}
+        <motion.div
+          className="text-center"
+          variants={fadeIn}
+        >
+          <button
+            type="button"
+            onClick={submitReservation}
+            className="bg-yellow-700/60 hover:bg-yellow-800/60 border-1 border-yellow-400 text-gray-300 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
+          >
+            Kirim Reservasi
+          </button>
+        </motion.div>
+      </motion.div>
+    </motion.div>
 
 
-                                        <div className="text-center">
-                                            <button
-                                                type="button"
-                                                onClick={submitReservation}
-                                                className="bg-yellow-700/60 hover:bg-yellow-800/60 border-1 border-yellow-400 text-gray-300 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
-                                            >
-                                                Kirim Reservasi
-                                            </button>
-                                        </div>
-                                    </div>
 
+    <motion.div
+      className="relative mt-10 p-8 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-xl shadow-lg text-white max-w-3xl mx-auto z-20 border-1 border-yellow-500"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <motion.h2
+        className="text-3xl font-bold text-yellow-400 mb-8 text-center tracking-wider"
+        variants={fadeIn}
+      >
+        Absensi Kehadiran Tamu
+      </motion.h2>
 
-                                </div>
+      <motion.div
+        className="text-center text-gray-300 mb-6"
+        variants={fadeIn}
+      >
+        <p className="text-xl">Atas Nama:</p>
+        <p className="text-2xl font-semibold text-yellow-300">
+          {decodedString}
+        </p>
+      </motion.div>
 
+      <motion.div
+        className="flex justify-center"
+        variants={fadeIn}
+      >
+        <div className="relative group bg-gradient-to-r from-yellow-400 to-yellow-600 p-1 rounded-2xl shadow-lg">
+          <div className="bg-white p-2 rounded-xl transition-transform duration-300 group-hover:scale-105">
+            <QRCode
+              value={slug}
+              renderAs="canvas"
+              size={isMobile ? 240 : 300}
+              level="H"
+              fgColor="#000000"
+              bgColor="#FFFFFF"
+              icon={logoEnter}
+              iconSize={75}
+            />
+          </div>
+        </div>
+      </motion.div>
 
-
-                                <div className="relative mt-10 p-8 bg-gradient-to-l from-yellow-900/10 to-yellow-800/10 rounded-xl shadow-lg text-white max-w-3xl mx-auto z-20 border-1 border-yellow-500">
-                                    <h2 className="text-3xl font-bold text-yellow-400 mb-8 text-center tracking-wider">
-                                        Absensi Kehadiran Tamu
-                                    </h2>
-                                    <div className="text-center text-gray-300 mb-6">
-                                        <p className="text-xl">Atas Nama:</p>
-                                        <p className="text-2xl font-semibold text-yellow-300">{decodedString}</p>
-                                    </div>
-                                    <div className="flex justify-center">
-                                        <div className="relative group bg-gradient-to-r from-yellow-400 to-yellow-600 p-1 rounded-2xl shadow-lg">
-                                            <div className="bg-white p-2 rounded-xl transition-transform duration-300 group-hover:scale-105">
-                                                <QRCode
-                                                    value={slug}
-                                                    renderAs="canvas"
-                                                    size={isMobile ? 240 : 300}
-                                                    level="H"
-                                                    fgColor="#000000"
-                                                    bgColor="#FFFFFF"
-                                                    icon={logoEnter}
-                                                    iconSize={75}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p className="text-center text-gray-300 mt-6">
-                                        Tunjukkan kode QR ini kepada petugas untuk validasi.
-                                    </p>
-                                </div>
+      <motion.p
+        className="text-center text-gray-300 mt-6"
+        variants={fadeIn}
+      >
+        Tunjukkan kode QR ini kepada petugas untuk validasi.
+      </motion.p>
+    </motion.div>
 
 
                             </div>
 
-                            <div className="flex items-center justify-center h-full">
-                                <img
-                                    src={logo}
-                                    alt="Logo"
-                                    className="w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[30vw] mb-10"
-                                />
-                            </div>
+    <div className="flex items-center justify-center h-full">
+      <motion.img
+        src={logo}
+        alt="Logo"
+        className="w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[30vw] mb-10"
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      />
+    </div>
 
                         </motion.div>
                     )}

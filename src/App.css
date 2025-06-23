@@ -1,26 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-.font-playfair {
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* .font-playfair {
   font-family: 'Playfair Display', serif;
 }
 
 .font-lato {
   font-family: 'Lato', sans-serif;
-}
+} */
 
 /* Styling scrollbar */
 ::-webkit-scrollbar {
-  width: 8px; /* Lebar scrollbar */
+  width: 8px;
+  /* Lebar scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent; /* Background transparan */
+  background: transparent;
+  /* Background transparan */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(212, 134, 38, 0.538); /* Warna biru tua */
-  border-radius: 4px; /* Membuat sudut melengkung */
-  border: 1px solid transparent; /* Memberi jarak kecil dengan track */
+  background-color: rgba(212, 134, 38, 0.538);
+  /* Warna biru tua */
+  border-radius: 4px;
+  /* Membuat sudut melengkung */
+  border: 1px solid transparent;
+  /* Memberi jarak kecil dengan track */
 }
 
 
