@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import backgroundpc from "../assets/backgroundpc.png";
 import backgroundhp from "../assets/backgroundhp.png";
-import { Popconfirm, message } from 'antd';
+import { Popconfirm, message, Modal } from 'antd';
+import { CheckCircleOutlined } from '@ant-design/icons';
 import backgroundpc2 from "../assets/backgroundpc2.png";
 import backgroundhp2 from "../assets/backgroundhp2.png";
 import backgroundAdmin from "../assets/backgroundAdmin.jpg";
@@ -18,6 +19,8 @@ import { v4 as uuidv4 } from 'uuid';
 const AdminGuestList = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState("");
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [guestDetails, setGuestDetails] = useState({});
 
     const checkPassword = async () => {
         try {
@@ -106,7 +109,7 @@ const AdminGuestList = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/attendance', {
+            const response = await fetch('https://rakevserver.space/attendance', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -211,7 +214,7 @@ const AdminGuestList = () => {
 
     const sendAttendanceToAPI = async (name) => {
         try {
-            const response = await fetch("http://localhost:3000/attendance", {
+            const response = await fetch("https://rakevserver.space/attendance", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -222,7 +225,7 @@ const AdminGuestList = () => {
             if (response.ok) {
                 const result = await response.json();
                 console.log("Data kehadiran berhasil dikirim:", result);
-                messageApi.success("Data kehadiran berhasil disimpan ke server!");
+                // messageApi.success("Data kehadiran berhasil disimpan ke server!");
             } else {
                 const error = await response.json();
                 console.error("Error saat mengirim data kehadiran:", error);
@@ -235,15 +238,11 @@ const AdminGuestList = () => {
     };
 
     const [scannedBarcode, setScannedBarcode] = useState("");
-    const inputRef = useRef(null); // Referensi ke kolom input
+    const inputRef = useRef(null);
 
     const validateAttendance = (input) => {
-        // Validasi langsung dengan nama tamu
         const matchedGuest = guests.find((guest) => guest.name === input);
-
         if (matchedGuest) return matchedGuest;
-
-        // Validasi dengan decoding barcode
         try {
             const decodedInput = atob(input);
             return guests.find((guest) => guest.name === decodedInput);
@@ -252,28 +251,38 @@ const AdminGuestList = () => {
         }
     };
 
-    const processInput = (input) => {
+    const scrollRef = useRef(null);
+    const processInput = async (input) => {
         const matchedGuest = validateAttendance(input);
 
         if (matchedGuest) {
-            // Periksa apakah sudah hadir
             const isAlreadyPresent = dataKehadiran.some(
                 (guest) => guest.name === matchedGuest.name
             );
-
             if (isAlreadyPresent) {
                 messageApi.warning(`${matchedGuest.name} sudah tercatat hadir.`);
             } else {
-                sendAttendanceToAPI(matchedGuest.name);
-                // Tambahkan ke data kehadiran
-                const newAttendance = {
-                    id: matchedGuest._id,
-                    name: matchedGuest.name,
-                    table: matchedGuest.table,
-                    attendanceTime: new Date(),
-                };
-                setDataKehadiran((prev) => [...prev, newAttendance]);
-                messageApi.success(`Selamat datang, ${matchedGuest.name}!`);
+                await sendAttendanceToAPI(matchedGuest.name);
+                await fetchDataKehadiran();
+                // const newAttendance = {
+                //     id: matchedGuest._id,
+                //     name: matchedGuest.name,
+                //     table: matchedGuest.table,
+                //     attendanceTime: new Date(),
+                // };
+                // setDataKehadiran((prev) => [...prev, newAttendance]);
+                // messageApi.success(`Selamat datang, ${matchedGuest.name}!`);
+                setGuestDetails(matchedGuest);
+                setIsModalVisible(true);
+                setTimeout(() => {
+                    setIsModalVisible(false);
+                    if (scrollRef.current) {
+                        scrollRef.current.scrollTo({
+                            top: scrollRef.current.scrollHeight,
+                            behavior: "smooth",
+                        });
+                    }
+                }, 3000);
             }
         } else {
             messageApi.error("Tamu tidak ditemukan atau data barcode tidak valid.");
@@ -288,37 +297,50 @@ const AdminGuestList = () => {
     };
 
     useEffect(() => {
-        // Fokus otomatis ke input setiap ada aktivitas keyboard
         const focusInput = () => {
             if (inputRef.current) {
                 inputRef.current.focus();
             }
         };
-
         window.addEventListener("keydown", focusInput);
         return () => {
             window.removeEventListener("keydown", focusInput);
         };
     }, []);
 
-const handleDeleteKehadiran = async (id) => {
-    try {
-        const response = await fetch(`http://localhost:3000/attendance/${id}`, {
-            method: 'DELETE',
-        });
+    const handleDeleteKehadiran = async (id) => {
+        try {
+            const response = await fetch(`https://rakevserver.space/attendance/${id}`, {
+                method: 'DELETE',
+            });
 
-        if (response.ok) {
-            message.success('Data berhasil dihapus!');
-            // Refresh data or remove the deleted item from `dataKehadiran`
-        } else {
-            message.error('Gagal menghapus data!');
+            if (response.ok) {
+                message.success('Data berhasil dihapus!');
+            } else {
+                message.error('Gagal menghapus data!');
+            }
+        } catch (error) {
+            message.error('Terjadi kesalahan saat menghapus data!');
         }
-    } catch (error) {
-        message.error('Terjadi kesalahan saat menghapus data!');
-    }
-    fetchDataKehadiran();
-};
+        fetchDataKehadiran();
+    };
 
+    const handleDeleteReservasi = async (id) => {
+        try {
+            const response = await fetch(`https://rakevserver.space/reservasi/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                message.success('Data reservasi berhasil dihapus!');
+            } else {
+                message.error('Gagal menghapus data reservasi!');
+            }
+        } catch (error) {
+            message.error('Terjadi kesalahan saat menghapus data reservasi!');
+        }
+        fetchDataReservasi();
+    };
 
     return !isAuthenticated ? (
         <div>
@@ -388,7 +410,7 @@ const handleDeleteKehadiran = async (id) => {
                                         </thead>
                                         <tbody>
                                             {guests.map((guest, index) => (
-                                                <tr key={guest._id || guest.tempId}>
+                                                <tr key={guest._id || guest.tempId} className='hover:bg-gray-400'>
                                                     <td className="px-4 py-2 border-b">{index + 1}</td>
                                                     <td className="px-4 py-2 border-b">
                                                         <input
@@ -453,38 +475,29 @@ const handleDeleteKehadiran = async (id) => {
                                         </thead>
                                         <tbody>
                                             {dataReservasi.map((guest, index) => (
-                                                <tr key={guest.id}>
-                                                    <td className="px-4 py-2 border-b">{index + 1}</td>
-                                                    <td className="px-4 py-2 border-b">
-                                                        <input
-                                                            type="text"
-                                                            value={guest.name}
-                                                            placeholder="Nama Tamu"
-                                                            className="w-full px-2 bg-transparent focus:outline-none"
-                                                            readOnly
-                                                        />
-                                                    </td>
-                                                    <td className="px-4 py-2 border-b">
-                                                        <input
-                                                            type="text"
-                                                            value={guest.guestCount}
-                                                            placeholder="Nomor"
-                                                            className="w-full px-2 bg-transparent focus:outline-none"
-                                                            readOnly
-                                                        />
-                                                    </td>
-                                                    <td
-                                                        className="px-4 py-2 border-b cursor-copy overflow-hidden whitespace-nowrap text-ellipsis"
+                                                <Popconfirm
+                                                    key={guest._id}
+                                                    title="Yakin ingin menghapus reservasi ini?"
+                                                    onConfirm={() => handleDeleteReservasi(guest._id)}
+                                                    okText="Ya"
+                                                    cancelText="Tidak"
+                                                >
+                                                    <tr
+                                                        className="cursor-pointer hover:bg-gray-400"
+                                                        style={{ transition: 'background-color 0.3s' }}
                                                     >
-                                                        <input
-                                                            type="text"
-                                                            value={guest.attendance}
-                                                            placeholder="Nomor"
-                                                            className="w-full px-2 bg-transparent focus:outline-none"
-                                                            readOnly
-                                                        />
-                                                    </td>
-                                                </tr>
+                                                        <td className="px-4 py-2 border-b">{index + 1}</td>
+                                                        <td className="px-4 py-2 border-b">
+                                                            {guest.name}
+                                                        </td>
+                                                        <td className="px-4 py-2 border-b">
+                                                            {guest.guestCount}
+                                                        </td>
+                                                        <td className="px-4 py-2 border-b">
+                                                            {guest.attendance}
+                                                        </td>
+                                                    </tr>
+                                                </Popconfirm>
                                             ))}
                                         </tbody>
                                     </table>
@@ -501,9 +514,8 @@ const handleDeleteKehadiran = async (id) => {
 
                     {selectedMenu === "Kehadiran" && (
                         <>
-                            {/* Input Manual */}
                             <input
-                                ref={inputRef} // Mengaitkan referensi input
+                                ref={inputRef}
                                 type="text"
                                 value={scannedBarcode}
                                 onChange={(e) => setScannedBarcode(e.target.value)}
@@ -512,10 +524,9 @@ const handleDeleteKehadiran = async (id) => {
                                 onKeyDown={handleManualInput}
                             />
 
-                            {/* Daftar Kehadiran */}
                             {dataKehadiran.length > 0 ? (
                                 <div className="overflow-x-hidden">
-                                    <div className="max-h-[70vh] overflow-y-auto">
+                                    <div ref={scrollRef} className="max-h-[65vh] overflow-y-auto">
                                         <table className="w-full text-left border-collapse table-fixed">
                                             <thead>
                                                 <tr>
@@ -524,34 +535,34 @@ const handleDeleteKehadiran = async (id) => {
                                                     <th className="px-4 py-2 border-b w-[30%]">Waktu</th>
                                                 </tr>
                                             </thead>
-                <tbody>
-                    {dataKehadiran.map((guest, index) => (
-                        <Popconfirm
-                            key={guest._id}
-                            title="Yakin ingin menghapus data ini?"
-                            onConfirm={() => handleDeleteKehadiran(guest._id)}
-                            okText="Ya"
-                            cancelText="Tidak"
-                        >
-                            <tr
-                                className="cursor-pointer hover:bg-gray-400"
-                                style={{ transition: 'background-color 0.3s' }}
-                            >
-                                <td className="px-4 py-2 border-b">{index + 1}</td>
-                                <td className="px-4 py-2 border-b">{guest.name}</td>
-                                <td className="px-4 py-2 border-b">
-                                    {new Date(guest.attendanceTime)
-                                        .toLocaleTimeString('id-ID', {
-                                            hour: '2-digit',
-                                            minute: '2-digit',
-                                            second: '2-digit',
-                                        })
-                                        .replace(/\./g, ':')}
-                                </td>
-                            </tr>
-                        </Popconfirm>
-                    ))}
-                </tbody>
+                                            <tbody>
+                                                {dataKehadiran.map((guest, index) => (
+                                                    <Popconfirm
+                                                        key={guest._id}
+                                                        title="Yakin ingin menghapus data ini?"
+                                                        onConfirm={() => handleDeleteKehadiran(guest._id)}
+                                                        okText="Ya"
+                                                        cancelText="Tidak"
+                                                    >
+                                                        <tr
+                                                            className="cursor-pointer hover:bg-gray-400"
+                                                            style={{ transition: 'background-color 0.3s' }}
+                                                        >
+                                                            <td className="px-4 py-2 border-b">{index + 1}</td>
+                                                            <td className="px-4 py-2 border-b">{guest.name}</td>
+                                                            <td className="px-4 py-2 border-b">
+                                                                {new Date(guest.attendanceTime)
+                                                                    .toLocaleTimeString('id-ID', {
+                                                                        hour: '2-digit',
+                                                                        minute: '2-digit',
+                                                                        second: '2-digit',
+                                                                    })
+                                                                    .replace(/\./g, ':')}
+                                                            </td>
+                                                        </tr>
+                                                    </Popconfirm>
+                                                ))}
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -642,6 +653,41 @@ const handleDeleteKehadiran = async (id) => {
 
                 </div>
             </div>
+            <Modal
+                title={null}
+                visible={isModalVisible}
+                footer={null}
+                centered
+                className="rounded-lg"
+                bodyStyle={{
+                    textAlign: 'center',
+                    padding: '2rem',
+                }}
+            >
+                <div className="flex flex-col items-center">
+                    <CheckCircleOutlined style={{ fontSize: '4rem', color: '#52c41a' }} />
+                    <h2 className="mt-4 text-2xl font-bold text-gray-800">
+                        Selamat Datang, {guestDetails.name}!
+                    </h2>
+                    <p className="mt-2 text-gray-500">
+                        Meja Anda : <span className="font-semibold">{guestDetails.table}</span>.
+                    </p>
+                    <p className="text-gray-500">
+                        Waktu Kehadiran:{" "}
+                        <span className="font-semibold">
+                            {new Date().toLocaleTimeString('id-ID', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                second: '2-digit',
+                            })}
+                        </span>
+                    </p>
+                    <div className="mt-4 w-full border-t border-gray-200"></div>
+                    <p className="mt-4 text-sm text-gray-400">
+                        Terima kasih telah hadir!
+                    </p>
+                </div>
+            </Modal>
 
         </>
     );
