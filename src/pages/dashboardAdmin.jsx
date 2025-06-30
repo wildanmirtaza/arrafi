@@ -15,12 +15,14 @@ import { FiPlus } from 'react-icons/fi';
 import { IoIosSend } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 const AdminGuestList = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [guestDetails, setGuestDetails] = useState({});
+    const navigate = useNavigate();
 
     const checkPassword = async () => {
         try {
@@ -586,14 +588,6 @@ const AdminGuestList = () => {
                         </button>
                     </div>
 
-                    {/* <div className="fixed bottom-16 left-4">
-                        <button
-                            onClick={() => { setSelectedMenu("Scanner") }}
-                            className="flex items-center gap-2 w-48 bg-yellow-600/70 hover:bg-yellow-700/70 border-1 border-yellow-400 text-white font-bold py-2 px-6 rounded-full shadow-lg transition-all"
-                        >
-                            <MdQrCodeScanner className="text-2xl" /> Scanner
-                        </button>
-                    </div> */}
                     <div className="fixed bottom-16 left-4">
                         <button
                             onClick={() => { setSelectedMenu("Reservasi") }}
@@ -617,6 +611,21 @@ const AdminGuestList = () => {
                         </button>
                     </div>
 
+                    <div className="fixed bottom-40 left-4">
+      <button
+        onClick={() => {
+          setSelectedMenu("Scanner");
+          navigate("/scanner");
+        }}
+        className={`flex items-center gap-2 w-48 px-6 py-2 font-bold text-white transition-all rounded-full shadow-lg border-1 cursor-pointer ${
+          selectedMenu === "Scanner"
+            ? "bg-gray-700/85 border-gray-500"
+            : "bg-gray-600/70 hover:bg-gray-700/70 border-gray-400"
+        }`}
+      >
+        <LuClipboardList className="text-2xl" /> Scanner
+      </button>
+                    </div>
 
                     {selectedMenu === "Daftar Tamu" && (
                         <>
