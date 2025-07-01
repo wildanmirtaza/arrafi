@@ -282,6 +282,7 @@ const AdminGuestList = () => {
     ) : (
         <>
             {contextHolder}
+
             <div
                 className="relative h-screen w-screen overflow-hidden text-white font-sriracha"
                 style={{
@@ -338,6 +339,16 @@ const AdminGuestList = () => {
                     </p>
                 </div>
             </Modal>
+
+            <div className="fixed top-4 right-4 z-50">
+                <button
+                    onClick={() => { fetchGuests(); fetchDataReservasi(); fetchDataKehadiran(); messageApi.success("Berhasil Fetch Data"); }}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition duration-300 cursor-pointer"
+                >
+                    Refresh
+                </button>
+            </div>
+
         </>
     );
 };
