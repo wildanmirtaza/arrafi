@@ -12,7 +12,7 @@ import "../App.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { QRCode, message } from "antd";
 import backgroundpc2 from "../assets/backgroundpc2.png";
-import backgroundhp2 from "../assets/bg-app-hp.gif";
+import backgroundhp2 from "../assets/bg.jpg";
 
 function App() {
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ function App() {
 
     const [isOpened, setIsOpened] = useState(false);
 
-    const targetDate = "2025-07-05T18:00:00";
+    const targetDate = "2026-07-05T10:00:00";
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -236,18 +236,10 @@ function App() {
                 style={{
                     backgroundImage: `url(${isMobile ? backgroundhp2 : backgroundpc2})`,
                     // backgroundSize: 'cover',
-                    backgroundSize: '150%',
+                    backgroundSize: '100%',
                     backgroundPosition: 'center',
                 }}
             >
-                <motion.img
-                    src={isMobile ? backgroundhp : backgroundpc}
-                    alt="Background"
-                    className="absolute inset-0 w-full h-auto object-cover opacity-75 pointer-events-none"
-                    initial={{ scale: 1.2 }}
-                    animate={isOpened ? { scale: 1.15 } : { scale: 1 }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                />
 
 
                 <AnimatePresence>
@@ -262,7 +254,7 @@ function App() {
                             <motion.img
                                 src={logo}
                                 alt="Logo"
-                                className="w-[80vw] sm:w-[40vw] md:w-[30vw] lg:w-[30vw] mb-10"
+                                className="w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[30vw] mb-10"
                                 variants={scaleIn}
                                 initial="hidden"
                                 animate="visible"
@@ -273,9 +265,23 @@ function App() {
                                 initial="hidden"
                                 animate="visible"
                             >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
                                 <p>Special Invite To:</p>
                                 <p
-                                    className="text-2xl font-bold text-yellow-400 relative"
+                                    className="text-2xl font-bold text-yellow-300 relative"
                                     style={{
                                         WebkitTextStroke: "0.25px #d8c600",
                                     }}
@@ -285,26 +291,68 @@ function App() {
                             </motion.div>
                             <motion.button
                                 onClick={() => setIsOpened(true)}
-                                className="bg-yellow-800 text-gray-200 font-semibold text-lg px-6 py-3 rounded-full shadow-md flex items-center gap-3 hover:bg-yellow-600 transition z-20 font-poppins cursor-pointer"
+                                className="bg-yellow-500 text-gray-200 font-semibold text-lg px-6 py-3 rounded-full shadow-md flex items-center gap-3 hover:bg-yellow-600 transition z-20 font-poppins cursor-pointer"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-gray-200"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M3 8l7.5 5.25a1.5 1.5 0 001.5 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                    />
-                                </svg>
                                 Buka Undangan
                             </motion.button>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -319,46 +367,57 @@ function App() {
                             animate="visible"
                             exit="exit"
                         >
+                                <div className="flex items-center justify-center h-full">
+      <motion.img
+        src={logo}
+        alt="Logo"
+        className="w-[60vw] sm:w-[40vw] md:w-[30vw] lg:w-[30vw] mb-10"
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      />
+    </div>
                             <div className="max-w-3xl mx-auto text-center mt-10">
                                 <motion.h1
-                                    className="text-5xl font-bold text-white mb-6"
+                                    className="text-l font-bold text-white mb-1"
                                     variants={fadeInUp}
                                 >
-                                    Pesona Muria D'Javanese
+                                    Mochammad
                                 </motion.h1>
-                                <motion.p
-                                    className="text-lg leading-relaxed text-gray-200 mb-4"
-                                    variants={fadeIn}
+                                <motion.h1
+                                    className="text-5xl font-bold text-yellow-200 mb-1"
+                                    variants={fadeInUp}
                                 >
-                                    Dalam rangka <span className="text-yellow-300">Hari Jadi Koperasi yang ke-76</span>, kami dengan bangga mengundang Anda untuk menghadiri acara:
-                                </motion.p>
+                                    Tyas
+                                </motion.h1>
+                                <motion.h1
+                                    className="text-xl font-bold text-white mb-100"
+                                    variants={fadeInUp}
+                                >
+                                    Al Muzanni
+                                </motion.h1>
                                 <motion.div
-                                    className="relative my-8 p-8 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-2xl shadow-2xl text-white z-20 border-1 border-yellow-500"
+                                    className="relative my-8 p-8 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-2xl shadow-2xl text-white z-20 border-1 border-yellow-200"
                                     variants={galleryFade}
                                 >
-                                    <motion.h1
-                                        className="text-3xl font-bold text-yellow-400 tracking-wider"
-                                        variants={fadeInUp}
-                                    >
-                                        Lomba Modelling & Fashion Show
-                                    </motion.h1>
                                     <motion.div
                                         className="space-y-4 mb-10 mt-10"
                                         variants={fadeIn}
                                     >
-                                        <p className="text-center text-xl text-yellow-400">
-                                            Tanggal: <span className="text-gray-300 font-semibold">Sabtu, 5 Juli 2025</span>
+                                        <p className="text-center text-xl text-white font-semibold">
+                                            Minggu, 5 Juli 2026
                                         </p>
-                                        <p className="text-center text-xl text-yellow-400">
-                                            Pukul: <span className="text-gray-300 font-semibold">18.00 - Selesai</span>
+                                        <p className="text-center text-xl text-white font-semibold mb-25">
+                                            10.00 - 13.30 WIB
                                         </p>
                                     </motion.div>
 
                                     <motion.h2
-                                        className="text-2xl font-bold text-yellow-400 mb-4 tracking-wide"
+                                        className="text-2xl font-bold text-yellow-200 mb-4 tracking-wide"
                                         variants={fadeInUp}
                                     >
-                                        Hitung Mundur
+                                        Countdown
                                     </motion.h2>
                                     {timerComponents.length ? (
                                         <motion.div
@@ -386,63 +445,8 @@ function App() {
                                         </motion.p>
                                     )}
 
-
-
-
                                     <motion.div
-                                        className="w-2/3 mx-auto border-t border-yellow-300 opacity-50 my-8"
-                                        variants={fadeIn}
-                                    ></motion.div>
-
-                                    <motion.div
-                                        className="space-y-6"
-                                        variants={fadeIn}
-                                    >
-                                        <h2 className="text-3xl font-semibold text-yellow-400 text-center mb-4">
-                                            Syarat dan Ketentuan
-                                        </h2>
-                                        <ul className="list-disc list-inside text-lg space-y-3 max-w-xl mx-auto text-gray-200">
-                                            <li>Laki-laki & Perempuan</li>
-                                            <li>Mengisi Formulir Online</li>
-                                            <li>Mengirim Foto</li>
-                                            <li>
-                                                Biaya Pendaftaran: <span className="text-yellow-300 font-bold">Rp150.000</span>
-                                            </li>
-                                        </ul>
-                                    </motion.div>
-
-                                    <motion.div
-                                        className="w-2/3 mx-auto border-t border-yellow-300 opacity-50 my-8"
-                                        variants={fadeIn}
-                                    ></motion.div>
-
-                                    <motion.div
-                                        className="space-y-6"
-                                        variants={{
-                                            hidden: { opacity: 0, y: 20 },
-                                            visible: {
-                                                opacity: 1,
-                                                y: 0,
-                                                transition: { duration: 0.5, delay: 0.2 }
-                                            },
-                                        }}
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true, amount: 0.2 }}
-                                    >
-                                        <h2 className="text-3xl font-semibold text-yellow-400 text-center mb-4">Kategori</h2>
-                                        <ul className="list-disc list-inside text-lg space-y-3 max-w-xl mx-auto text-gray-200">
-                                            <li>Prestasi</li>
-                                            <li>Motivasi</li>
-                                        </ul>
-                                        <p>Anak / Remaja 6-16 Tahun<br />Dewasa 17-25 Tahun</p>
-                                        <p className="text-center text-xl mt-6 text-yellow-300">
-                                            Tema: <span className="font-bold text-gray-300">Etnik Casual</span>
-                                        </p>
-                                    </motion.div>
-
-                                    <motion.div
-                                        className="w-2/3 mx-auto border-t border-yellow-300 opacity-50 my-8"
+                                        className="w-2/3 mx-auto opacity-0 my-30"
                                         initial="hidden"
                                         whileInView="visible"
                                         viewport={{ once: true, amount: 0.2 }}
@@ -469,10 +473,10 @@ function App() {
                                         whileInView="visible"
                                         viewport={{ once: true, amount: 0.2 }}
                                     >
-                                        <h2 className="text-3xl font-semibold text-yellow-400 mb-4">Lokasi Acara</h2>
+                                        <h2 className="text-2xl font-semibold text-white mb-4">Venue</h2>
                                         <div className="animate-zoom-in">
                                             <iframe
-                                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3955.0784547356473!2d110.8417464421937!3d-6.807802809170903!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7123c740504c15%3A0x5c953c221017d9c6!2sMarker%20Location!5e0!3m2!1sen!2sid!4v1627990606581!5m2!1sen!2sid"
+                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.440178657667!2d110.81930907475623!3d-6.837711893160366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70c462f7684b91%3A0x2757715038b21140!2sHotel%20Griptha!5e0!3m2!1sid!2sid!4v1782798471767!5m2!1sid!2sid"
                                                 width="100%"
                                                 height="300"
                                                 style={{ border: 0, borderRadius: "10px" }}
@@ -481,69 +485,24 @@ function App() {
                                                 title="Google Maps Location"
                                             ></iframe>
                                         </div>
-                                        <p className="text-gray-300 font-semibold mt-3">Alun-Alun Simpang 7 Kudus</p>
+                                        <p className="text-2xl text-white mt-3">Hotel Griptha Kudus</p>
                                     </motion.div>
 
 
                                 </motion.div>
 
-    <motion.div
-      className="relative mt-10 p-6 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-xl shadow-lg text-white max-w-5xl mx-auto z-20 border-1 border-yellow-500"
-      variants={fadeIn}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
-      <motion.h2
-        className="text-3xl font-bold text-yellow-400 mb-6 text-center"
-        variants={fadeIn}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        Galeri Acara
-      </motion.h2>
-
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {[imgGallery1, imgGallery2, imgGallery3, imgGallery4].map((img, index) => (
-          <motion.div
-            key={index}
-            className="relative overflow-hidden rounded-lg shadow-md group"
-            custom={index} // Untuk mengatur delay berdasarkan index
-            variants={galleryItemAnimation}
-          >
-            <img
-              src={img}
-              alt={`Galeri ${index + 1}`}
-              className="w-full h-56 object-cover border-1 border-yellow-400 transform transition-transform duration-500 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p className="text-lg font-semibold text-gray-300 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                {["Sungai Rahtawu", "Sungai Rahtawu", "Bukit Puteran", "Bukit Puteran"][index]}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </motion.div>
-
 <motion.div
-      className="mt-10 bg-gradient-to-r from-[#fdfd9615] to-[#fdfd9615] p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-500"
+      className="mt-10 bg-gradient-to-r from-[#fdfd9615] to-[#fdfd9615] p-8 rounded-2xl shadow-2xl text-white w-full max-w-3xl mx-auto z-20 border border-yellow-200"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
       <motion.h1
-        className="text-3xl font-extrabold text-yellow-400 text-center mb-8 tracking-wide"
+        className="text-2xl font-extrabold text-yellow-200 text-center mb-8 tracking-wide"
         variants={fadeIn}
       >
-        Reservasi Kehadiran
+        Konfirmasi Kehadiran
       </motion.h1>
 
       <motion.div
@@ -555,14 +514,14 @@ function App() {
       >
         {/* Nama Anda */}
         <motion.div variants={fadeIn}>
-          <label className="block text-lg font-semibold text-gray-200 mb-2">
+          <label className="block text-lg font-semibold text-white mb-2">
             Nama Anda
           </label>
           <div className="relative">
             <input
               type="text"
               placeholder="Masukkan Nama Anda"
-              className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+              className="w-full px-4 py-3 rounded-full border border-yellow-200 bg-yellow-200/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-200 text-white placeholder-white"
               value={decodedString}
               disabled
             />
@@ -571,7 +530,7 @@ function App() {
 
         {/* Jumlah Tamu */}
         <motion.div variants={fadeIn}>
-          <label className="block text-lg font-semibold text-gray-200 mb-2">
+          <label className="block text-lg font-semibold text-white mb-2">
             Jumlah Tamu
           </label>
           <div className="relative">
@@ -579,7 +538,7 @@ function App() {
               type="number"
               min="1"
               placeholder="Masukkan jumlah tamu"
-              className="w-full px-4 py-3 rounded-full border border-yellow-500 bg-yellow-900/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-300 placeholder-gray-500"
+              className="w-full px-4 py-3 rounded-full border border-yellow-200 bg-yellow-200/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-200 text-white placeholder-white"
               value={guestCount}
               onChange={(e) => setGuestCount(e.target.value)}
             />
@@ -591,7 +550,7 @@ function App() {
           className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           variants={fadeIn}
         >
-          <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
+          <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-200 bg-yellow-200/20 hover:bg-yellow-200/20 transition cursor-pointer shadow-md">
             <input
               type="radio"
               name="kehadiran"
@@ -602,7 +561,7 @@ function App() {
             />
             <span className="text-sm font-medium text-gray-300">Hadir</span>
           </label>
-          <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-500 bg-yellow-900/20 hover:bg-yellow-800/20 transition cursor-pointer shadow-md">
+          <label className="flex items-center gap-2 p-4 rounded-full border border-yellow-200 bg-yellow-200/20 hover:bg-yellow-200/20 transition cursor-pointer shadow-md">
             <input
               type="radio"
               name="kehadiran"
@@ -625,10 +584,17 @@ function App() {
           <button
             type="button"
             onClick={submitReservation}
-            className="bg-yellow-700/60 hover:bg-yellow-800/60 border-1 border-yellow-400 text-gray-300 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
+            className="bg-yellow-300/60 hover:bg-yellow-400/60 border-1 border-yellow-200 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full sm:w-auto cursor-pointer hover:scale-105"
           >
-            Kirim Reservasi
+            Konfirmasi
           </button>
+                            <motion.div
+                                className="mb-16 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
         </motion.div>
       </motion.div>
     </motion.div>
@@ -636,25 +602,19 @@ function App() {
 
 
     <motion.div
-      className="relative mt-10 p-8 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-xl shadow-lg text-white max-w-3xl mx-auto z-20 border-1 border-yellow-500"
+      className="relative mt-10 p-8 bg-gradient-to-l from-[#fdfd9615] to-[#fdfd9615] rounded-xl shadow-lg text-white max-w-3xl mx-auto z-20 border-1 border-yellow-200"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <motion.h2
-        className="text-3xl font-bold text-yellow-400 mb-8 text-center tracking-wider"
-        variants={fadeIn}
-      >
-        Absensi Kehadiran Tamu
-      </motion.h2>
+
 
       <motion.div
         className="text-center text-gray-300 mb-6"
         variants={fadeIn}
       >
-        <p className="text-xl">Atas Nama:</p>
-        <p className="text-2xl font-semibold text-yellow-300">
+        <p className="text-2xl font-semibold text-yellow-200">
           {decodedString}
         </p>
       </motion.div>
@@ -663,7 +623,7 @@ function App() {
         className="flex justify-center"
         variants={fadeIn}
       >
-        <div className="relative group bg-gradient-to-r from-yellow-400 to-yellow-600 p-1 rounded-2xl shadow-lg">
+        <div className="relative group bg-gradient-to-r from-yellow-200 to-yellow-200 p-1 rounded-2xl shadow-lg">
           <div className="bg-white p-2 rounded-xl transition-transform duration-300 group-hover:scale-105">
 <QRCode
   value={slug}
@@ -677,18 +637,29 @@ function App() {
           </div>
         </div>
       </motion.div>
-
+                            <motion.div
+                                className="mb-20 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
       <motion.p
         className="text-center text-gray-300 mt-6"
         variants={fadeIn}
       >
-        Tunjukkan kode QR ini kepada petugas untuk validasi.
       </motion.p>
     </motion.div>
 
 
                             </div>
-
+                            <motion.div
+                                className="mb-40 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                            </motion.div>
     <div className="flex items-center justify-center h-full">
       <motion.img
         src={logo}
