@@ -286,6 +286,13 @@ function App() {
                                 initial="hidden"
                                 animate="visible"
                             >
+                            </motion.div>
+                            <motion.div
+                                className="mb-8 text-lg space-y-1 font-poppins"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                            >
                                 <p>Special Invite To:</p>
                                 <p
                                     className="text-2xl font-bold text-yellow-300 relative"
